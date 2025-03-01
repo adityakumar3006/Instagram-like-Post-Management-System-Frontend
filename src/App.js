@@ -15,7 +15,7 @@ const App = () => {
   }, []);
 
   const fetchPosts = async () => {
-    const res = await axios.get("http://localhost:5000/posts");
+    const res = await axios.get("https://instagram-like-post-management-system-g5zj.onrender.com/posts");
     setPosts(res.data);
   };
 
@@ -27,11 +27,11 @@ const App = () => {
     if (image) formData.append("image", image);
 
     if (editingPost) {
-      await axios.put(`http://localhost:5000/posts/${editingPost._id}`, formData, {
+      await axios.put(`https://instagram-like-post-management-system-g5zj.onrender.com/posts/${editingPost._id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
     } else {
-      await axios.post("http://localhost:5000/posts", formData, {
+      await axios.post("https://instagram-like-post-management-system-g5zj.onrender.com/posts", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
     }
@@ -43,7 +43,7 @@ const App = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/posts/${id}`);
+    await axios.delete(`https://instagram-like-post-management-system-g5zj.onrender.com/posts/${id}`);
     fetchPosts();
   };
 
@@ -67,7 +67,7 @@ const App = () => {
             <div key={post._id} className="border p-6 rounded shadow-lg w-full mb-4">
               <h3 className="text-2xl font-semibold mb-2">{post.title}</h3>
               <p className="mb-4 text-lg">{post.description}</p>
-              {post.image && <img src={`http://localhost:5000/${post.image}`} alt={post.title} className="w-full max-h-[500px] object-cover rounded" />}
+              {post.image && <img src={`https://instagram-like-post-management-system-g5zj.onrender.com/${post.image}`} alt={post.title} className="w-full max-h-[500px] object-cover rounded" />}
               <div className="mt-4 flex justify-between">
                 <button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={() => { setTitle(post.title); setDescription(post.description); setEditingPost(post); }}>Edit</button>
                 <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={() => handleDelete(post._id)}>Delete</button>
